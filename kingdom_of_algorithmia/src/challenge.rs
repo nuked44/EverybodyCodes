@@ -1,4 +1,5 @@
 pub mod c1;
+pub mod c2;
 
 pub trait Challenge {
     fn name(&self) -> String;

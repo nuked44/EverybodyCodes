@@ -11,7 +11,8 @@ fn main() {
     let args: Vec<String> = std::env::args().collect();
 
     let mut c1 = c1::C1::new();
-    let mut challenges: Vec<&mut dyn Challenge> = vec![&mut c1];
+    let mut c2 = c2::C2::new();
+    let mut challenges: Vec<&mut dyn Challenge> = vec![&mut c1, &mut c2];
     let mut run_behavior = RunBehavior::Last;
 
     if args.len() == 2 {
