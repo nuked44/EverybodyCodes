@@ -110,7 +110,6 @@ impl Challenge for C1 {
                     _ => unreachable!(),
                 }
             }
-            //println!("{}{}{}: count {}, total: {}",enemies[3*i] as char, enemies[3*i+1] as char, enemies[3*i+2] as char, enemy_count, total);
         }
 
         format!("{}", total)
