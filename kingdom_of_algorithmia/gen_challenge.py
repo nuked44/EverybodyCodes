@@ -11,6 +11,8 @@ class print_colors:
 def make_challenge_file(challenge_num: int):
     challenge_file = open(f"./src/challenge/c{challenge_num}.rs", "x")
     challenge_file.write(f"""
+use super::Challenge;                         
+
 #[derive(Default)]
 pub struct C{challenge_num} {{
     
