@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use crate::util;
 
 use super::Challenge;
@@ -56,27 +58,43 @@ impl Challenge for C2 {
     }
 
     fn part2(&self) -> String {
-        // Wrong output 
-        // Words: THE, HER
-        // expected e.g. THERE => 4 THERe
-        // actual        THERE => 6 THE_HERe
-        // let text = &self.p2_text;
-        // let words = self.p2_words.clone();
-        // let mut total = 0;
-        // for text_part in text.iter() {
-        //     let rev_text = text_part.chars().rev().collect::<String>();
-        //     for word in words.iter() {
-        //         let forward_count = text_part.matches(word).count() * word.len();
-        //         let backward_count = rev_text.matches(word).count() * word.len();
-        //         total += forward_count;
-        //         total += backward_count;
-        //     }
-        // }
-        
-        format!("")
+
+        let text = &self.p2_text;
+        let mut words = self.p2_words.clone();
+        let mut rev_words = words
+            .iter()
+            .map(|w| w.chars().rev().collect::<String>())
+            .collect::<Vec<String>>();
+        words.append(&mut rev_words);
+
+        let mut total = 0;
+        for text_part in text.iter() {
+            let forward_count = find_char_ammount_in_str(text_part, &words);
+            total += forward_count;
+        }
+
+        format!("{total}")
     }
 
     fn part3(&self) -> String {
         format!("")
     }
+}
+
+fn find_char_ammount_in_str(str: &String, words: &Vec<String>) -> usize {
+    let mut matches = HashSet::<usize>::with_capacity(str.len());
+    for word in words.iter() {
+        let mut start = 0;
+
+        while let Some(pos) = str[start..].find(word) {
+            let absolute_pos = start + pos;
+
+            for i in 0..word.len() {
+                matches.insert(absolute_pos + i);
+            }
+
+            start = absolute_pos + 1;
+        }
+    }
+    matches.len()
 }
