@@ -6,6 +6,8 @@ use super::Challenge;
 pub struct C2 {
     p1_words: Vec<String>,
     p1_text: Vec<String>,
+    p2_words: Vec<String>,
+    p2_text: Vec<String>,
 }
 
 impl C2 {
@@ -29,6 +31,16 @@ impl Challenge for C2 {
             .map(|s| s.to_string())
             .collect();
         self.p1_text = lines[2].split(" ").map(|s| s.to_string()).collect();
+
+        let lines = util::read_file_lines("src/input/c2p2.txt");
+        self.p2_words = lines[0]
+            .split_once(":")
+            .unwrap()
+            .1
+            .split(",")
+            .map(|s| s.to_string())
+            .collect();
+        self.p2_text = lines[2..].to_vec();
     }
 
     fn part1(&self) -> String {
@@ -44,6 +56,23 @@ impl Challenge for C2 {
     }
 
     fn part2(&self) -> String {
+        // Wrong output 
+        // Words: THE, HER
+        // expected e.g. THERE => 4 THERe
+        // actual        THERE => 6 THE_HERe
+        // let text = &self.p2_text;
+        // let words = self.p2_words.clone();
+        // let mut total = 0;
+        // for text_part in text.iter() {
+        //     let rev_text = text_part.chars().rev().collect::<String>();
+        //     for word in words.iter() {
+        //         let forward_count = text_part.matches(word).count() * word.len();
+        //         let backward_count = rev_text.matches(word).count() * word.len();
+        //         total += forward_count;
+        //         total += backward_count;
+        //     }
+        // }
+        
         format!("")
     }
 
