@@ -17,7 +17,7 @@ fn main() {
 
     if args.len() == 2 {
         let id = args[1].parse::<usize>().expect(&usage());
-        run_behavior = RunBehavior::Specific(id);
+        run_behavior = RunBehavior::Specific(id - 1);
     }
 
     match run_behavior {
